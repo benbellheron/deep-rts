@@ -589,7 +589,8 @@ void Unit::clearStateForTile(Tile *t){
     game->state(t->x, t->y, 9) = 0; // Unit Defense Score
 }
 void Unit::setStateForTile(Tile *t){
-    game->state(t->x, t->y, 1) = player_.getId(); // Player ID
+    // HACK: add 1 to player id, since default is 0
+    game->state(t->x, t->y, 1) = 1 + player_.getId(); // Player ID
     game->state(t->x, t->y, 2) = (canMove) ? 0 : 1; // 1 if its a building
     game->state(t->x, t->y, 3) = (canMove) ? 1 : 0; // 1 if its a unit
     game->state(t->x, t->y, 4) = int(typeId); // Unit Type
