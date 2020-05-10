@@ -17,14 +17,6 @@ class Game(Engine.Game):
         # c++)
         os.chdir(dir_path)
 
-        # Override map
-        parser = argparse.ArgumentParser(description='Process some integers.')
-        parser.add_argument('--map', action="store", dest="map", type=str)
-        args = parser.parse_args()
-
-        if args.map is not None:
-            map_name = args.map
-
         # TODO
         if engine_config:
             engine_config.set_terminal_signal(terminal_signal)
