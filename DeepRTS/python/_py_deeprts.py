@@ -132,9 +132,5 @@ class Game(Engine.Game):
         #self.gui.gui_tiles.set_tile(tile.x, tile.y, tile.get_type_id())
 
     def _on_tile_change(self, tile):
-        pass
-        # self.gui.on_tile_change(tile)
-
-
-
-
+        if self.gui_config.render:
+            self.gui.on_tile_change(tile)
