@@ -43,7 +43,9 @@ class Game(Engine.Game):
         self._view_every = 1
         self._capture_every = 1
 
-        self.gui = GUI(self, tile_size=tile_size, config=gui_config if isinstance(gui_config, Config) else Config())
+        self.gui_config = gui_config if gui_config is not None else Config()
+        if self.gui_config.render:
+            self.gui = GUI(self, tile_size=tile_size, config=gui_config if isinstance(gui_config, Config) else Config())
 
         # Create players
         for i in range(n_players):
@@ -68,17 +70,17 @@ class Game(Engine.Game):
     def update(self):
         self.tick()
 
-        if self.gui.config.input:
+        if self.gui_config.input:
             self.event()
 
         super().update()
 
         self.caption()
 
-        if self.gui.config.render:
+        if self.gui_config.render:
             self.render()
 
-        if self.gui.config.view:
+        if self.gui_config.view:
             self.view()
 
     def _render(self):
@@ -90,7 +92,7 @@ class Game(Engine.Game):
             self.gui.view()
 
     def event(self):
-            self.gui.event()
+        self.gui.event()
 
     def capture(self):
         if self.get_ticks() % self._capture_every == 0:
@@ -138,7 +140,8 @@ class Game(Engine.Game):
         #self.gui.gui_tiles.set_tile(tile.x, tile.y, tile.get_type_id())
 
     def _on_tile_change(self, tile):
-        self.gui.on_tile_change(tile)
+        pass
+        # self.gui.on_tile_change(tile)
 
 
 
